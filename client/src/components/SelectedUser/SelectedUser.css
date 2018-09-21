@@ -1,0 +1,17 @@
+.component-wrapper-select-user {
+    position: relative;
+    display: inline-block;
+    border: 1px solid;
+    padding: 10px;
+    animation: new-one .2s linear;
+}
+
+@keyframes new-one {
+    from {
+        transform: translate(-100px, 0);
+    }
+    to {
+        transform: translate(0, 0);
+    }
+}
+  

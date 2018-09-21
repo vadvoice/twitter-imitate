@@ -1,0 +1,9 @@
+.component-wrapper-login {
+    text-align: right;
+    max-width: 800px;
+    margin: 0 auto
+}
+
+.component-wrapper-login input {
+    margin-bottom: 20px;
+}

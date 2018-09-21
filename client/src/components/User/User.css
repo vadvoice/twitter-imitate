@@ -1,0 +1,11 @@
+.component-wrapper-user {
+    display: inline-block;
+    max-width: 50%;
+    border: 1px solid;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.component-wrapper-user:hover {
+    box-shadow: 5px 5px 10px;
+}

@@ -38,12 +38,11 @@ class SignIn extends Component {
         this.props.loginRequest(authBody)
         axios.post('login', authBody)
             .then(response => {
-                message.success(response.response.data)
-                console.log('response')
+                message.success(`Success login: ${response.data.auth}`)
                 this.props.loginSuccess(response.data)
+                this.props.history.push('/dashboard')
             })
             .catch(err => {
-                console.log('error!')
                 message.error(err.response.data)
                 this.props.loginFaild(err.response.data)
                 console.error(err.response)

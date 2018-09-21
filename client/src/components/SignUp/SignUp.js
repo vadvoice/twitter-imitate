@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Input, Button, message } from 'antd';
 import './SignUp.css';
-import { Spin } from 'antd';
-import { LOGIN_REQUEST, LOGIN_FAIL, LOGIN_SUCCESS } from 'actions/types';
-import axios from 'axios'
 
 class SignUp extends Component {
 
@@ -115,11 +112,15 @@ class SignUp extends Component {
                     htmlType="submit"
                 >Submint</Button>
             </form>
-            {loginErrors && ['email', 'name', 'password'].map((key, index) => {
-                if(loginErrors.errors && loginErrors.errors[key]) {
-                    return <p key={index}>{loginErrors.errors[key].message}</p>
-                }
-            })}
+            {
+                loginErrors ? ['email', 'name', 'password'].map((key, index) => {
+                    if(loginErrors.errors && loginErrors.errors[key]) {
+                        return <p key={index}>{loginErrors.errors[key].message}</p>
+                    } else {return ''}
+                })
+                :
+                null
+            }
 
             </div>
         )

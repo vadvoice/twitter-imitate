@@ -1,4 +1,9 @@
-import { LOGIN_REQUEST, LOGIN_FAIL, LOGIN_SUCCESS } from 'actions/types';
+import {
+  LOGIN_REQUEST,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT
+} from 'actions/types';
 
 const initialState = {
   login: false,
@@ -7,13 +12,13 @@ const initialState = {
   authInfo: {}
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
         ...state,
+        loginWaiting: true,
         credentials: action.payload,
-        loginWaiting: true
       };
     case LOGIN_FAIL:
       return {
@@ -22,10 +27,17 @@ export default function(state = initialState, action) {
         errorDesc: action.payload
       }
     case LOGIN_SUCCESS:
+      window.localStorage.setItem('user-info', JSON.stringify(action.payload))
       return {
         ...state,
         loginWaiting: false,
         authInfo: action.payload
+      }
+    case LOGOUT:
+      window.localStorage.removeItem('user-info')
+      window.location.reload()
+      return {
+        ...state
       }
     default:
       return state;

@@ -1,0 +1,13 @@
+{
+  "lastRun": "1537803962341-add-posts.js",
+  "migrations": [
+    {
+      "title": "1537801346329-add-users.js",
+      "timestamp": 1537804055284
+    },
+    {
+      "title": "1537803962341-add-posts.js",
+      "timestamp": 1537804055313
+    }
+  ]
+}

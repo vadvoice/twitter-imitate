@@ -24,10 +24,15 @@ const navigationLinks = {
     account: {
         link: 'account',
         title: 'account'
+    },
+    news: {
+        link: 'news',
+        title: 'news list'
     }
 }
 
-const loggedInLinks = ['dashboard', 'account', 'app']
+const loggedInLinks = ['dashboard', 'account', 'app', 'news']
+const notLoggedInLinks = ['signin', 'signup', 'app']
 
 const Navigation = (props) => {
     return(
@@ -44,11 +49,7 @@ const Navigation = (props) => {
                     </div>
                     :
                     <div className="navigation--links-wrap">
-                        {
-                            Object.keys(navigationLinks).map((navigationKey, i) => {
-                                return <Link key={i} to={`/${navigationLinks[navigationKey].link}`}>{navigationLinks[navigationKey].title}</Link>
-                            })
-                        }
+                        {notLoggedInLinks.map((navigationKey, i) => <Link key={i} to={`/${navigationLinks[navigationKey].link}`}>{navigationLinks[navigationKey].title}</Link>)}
                     </div>
             }
         </div>

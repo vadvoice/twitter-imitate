@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import axios from 'axios';
+import axios from 'axios';
 import { FETCH_USERS, NEW_USER } from 'actions/types';
 
 import User from 'components/User/User'
@@ -14,21 +14,25 @@ class App extends Component {
     selected: []
   }
 
-  getAllPosts = () => {
-    // axios.get('users')
-    //   .then(res => {
-    //     this.props.fetchUsers(res.data.users)
-    //   })
-    //   .catch(err => {
-    //     message.error(err.response.data)
-    //     console.error(err.response)
-    //   })
-    fetch('users')
-      .then(response => response.json())
+  // getAllPosts = () => {
+  //   fetch('users')
+  //     .then(response => response.json())
+  //     .then(res => {
+  //       this.props.fetchUsers(res.users)
+  //     })
+  //     .catch(err => console.error(err))
+  // }
+
+  getUsers = () => {
+    axios.get('/user')
       .then(res => {
-        this.props.fetchUsers(res.users)
+        this.setState({
+          users: res.data.users
+        })
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error('error: ', err.response)
+      })
   }
 
   handleSelect = (selection) => {
@@ -49,23 +53,42 @@ class App extends Component {
     }
   }
 
+  renderUserDelay(user, i) {
+    setTimeout(() => {
+      console.log('is this trigger?')
+      return 
+    }, 300)
+  }
+
   render() {
-    const { selected } = this.state
+    const { selected, users: realUsers } = this.state
     const { users } = this.props
 
     return (
-      <div className="App">
+      <div className="App container">
         <header>
-          <Button
+          {/*
+            <Button
               type="primary"
               onClick={ this.getAllPosts }
             >Fetch users</Button>
+          */}
+
+          <Button
+              type="primary"
+              onClick={ this.getUsers }
+            >Get real users</Button>
+
           <div className="selection-block">
             { selected.map( (seletedItem, index) => <SelectedUser key={ index } user={ seletedItem } remove={ this.handleRemove } />) }
           </div>
         </header>
         <div className="users-wrapper">
           { users.items.map((user, i) => <User key={ i } isSelected={selected.includes(user)} setUser={ this.handleSelect } user={ user }/>) }
+        </div>
+
+        <div className="real-users-wrapper">
+          { realUsers && realUsers.map((user, i) => <p key={i}>{user.name}</p> )}
         </div>
       </div>
     );

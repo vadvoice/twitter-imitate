@@ -43,6 +43,7 @@ class SignIn extends Component {
                 this.props.history.push('/dashboard')
             })
             .catch(err => {
+                console.log(err.response)
                 message.error(err.response.data)
                 this.props.loginFaild(err.response.data)
                 console.error(err.response)

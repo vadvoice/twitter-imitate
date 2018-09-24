@@ -7,7 +7,7 @@ import Navigation from 'components/Navigation/Navigation'
 class Header extends Component {
     render() {
         const {auth, logoutAction} = this.props
-        const isLogged = auth.authInfo.auth
+        const isLogged = auth.authInfo.user
         return(
             <div className="componet-wrapper componet-wrapper-header">
                 <Navigation isLogged={isLogged} logoutAction={logoutAction} />

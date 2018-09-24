@@ -18,11 +18,12 @@ function login(req, res, next) {
                 if(fail) res.status(500).send('compare password error')
 
                 if(compareStatus) {
-                    console.log('correct password!')
-                    var token = jwt.sign({ id: findeduser._id }, config.secret, {
-                        expiresIn: 86400
-                    });
-                    res.status(200).send({ auth: true, token: token })
+                    const token = jwt.sign({
+                        id: findeduser._id,
+                        access: 'auth',
+                        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1)
+                      }, config.secret)
+                    res.status(200).send({ token: token, user: findeduser})
                 } else {
                     res.status(404).send('invalid email or password')
                 }

@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+const userSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -14,11 +14,23 @@ var userSchema = new Schema({
         type: String,
         required: [true, 'Rilly... without email?']
     },
-    about: String,
-    age: Number,
-    company: String
+    profile: {
+        age: Number,
+        about: String,
+        company: String,
+    },
+    address: {
+        city: String,
+        country: String
+    },
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }],
+    createdAt: Date,
+    updatedAt: Date
 });
 
-var User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User

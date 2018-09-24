@@ -1,6 +1,7 @@
 import React from 'react';
 
 import App from 'containers/App/App'
+import News from 'containers/News/News'
 import Dashboard from './containers/Dashboard/Dashboard';
 
 import SignUp from 'components/SignUp/SignUp'
@@ -24,6 +25,7 @@ const Root = (props)  => {
                     <Route path="/signin" component={ SignIn } ></Route>
                     <Route path="/dashboard" component={ Dashboard } ></Route>
                     <Route path="/account" component={ Account } ></Route>
+                    <Route path="/news" component={ News } ></Route>
                 </Switch>
             </main>
         </div>

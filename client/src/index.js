@@ -17,13 +17,31 @@ import './index.css';
 //     console.log(store.getState())
 // })
 
+// set up axios
+let baseURL
+function setUpAxios() {
+    console.log(`start the ${process.env.NODE_ENV} mode`)
+    switch (process.env.NODE_ENV) {
+        case 'development':
+            baseURL = 'http://localhost:5000'
+            break
+        case 'production':
+            baseURL = 'http://localhost:8888'
+            break
+        default:
+            baseURL = 'http://localhost:5000'
+    }
+    axios.defaults.baseURL = baseURL;
+
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+}
+
 function backgroundLogin() {
     const localStorageUserInfo = window.localStorage.getItem('user-info');
-
     if (localStorageUserInfo) {
         const parsed = JSON.parse(localStorageUserInfo)
-        axios.defaults.headers.common['Authorization'] = `Bearer ${parsed.token}`;
         axios.defaults.headers['Authorization'] = `Bearer ${parsed.token}`;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${parsed.token}`;
         store.dispatch({
             type: LOGIN_SUCCESS,
             payload: parsed
@@ -33,6 +51,7 @@ function backgroundLogin() {
     }
 }
 
+setUpAxios();
 backgroundLogin();
 
 ReactDOM.render(

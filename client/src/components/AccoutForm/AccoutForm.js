@@ -11,7 +11,8 @@ class AccoutForm extends Component {
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
-        downloadedAvatar: ''
+        downloadedAvatar: '',
+        backgroundImage: ''
     };
 
     cleanObject(obj) {
@@ -22,8 +23,12 @@ class AccoutForm extends Component {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
+
           if(this.state.downloadedAvatar) {
             values = {...values, avatar: this.state.downloadedAvatar}
+          }
+          if(this.state.backgroundImage) {
+            values = {...values, background: this.state.backgroundImage}
           }
 
           this.cleanObject(values)
@@ -34,11 +39,11 @@ class AccoutForm extends Component {
     }
 
     onAvatarChange = (evt) => {
-        var tgt = evt.target || window.event.srcElement,
+        let tgt = evt.target || window.event.srcElement,
             files = tgt.files;
 
         if (FileReader && files && files.length) {
-            var fr = new FileReader();
+            let fr = new FileReader();
             fr.onload = () => {
                 this.refs['avatar'].src = fr.result;
                 this.setState({
@@ -52,20 +57,52 @@ class AccoutForm extends Component {
         }
     }
 
+    onBackgroundChange = (evt) => {
+      let tgt = evt.target || window.event.srcElement,
+          files = tgt.files;
+
+      if (FileReader && files && files.length) {
+          let fr = new FileReader();
+          fr.onload = () => {
+              this.refs['background'].src = fr.result;
+              this.setState({
+                backgroundImage: fr.result
+              })
+          }
+          fr.readAsDataURL(files[0]);
+      }
+      else {
+         console.error('not allowed format')
+      }
+    }
+
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { downloadedAvatar } = this.state;
+        const { downloadedAvatar, backgroundImage } = this.state;
 
         return(
              <Form onSubmit={this.handleSubmit}  className="component-wrapper component-wrapper-account-form">
                 <div className="accout-form-avatar-block">
-                  <img ref={"avatar"} id={"user-avatar"} alt="user-avatar" src={downloadedAvatar ? downloadedAvatar : DefaultAvatar} />
-                  <input
+                  <div>
+                    <img ref={"avatar"} id={"user-avatar"} alt="user-avatar" src={downloadedAvatar ? downloadedAvatar : DefaultAvatar} />
+                    <input
+                        type="file"
+                        onChange={this.onAvatarChange}
+                        accept="image/x-png,image/gif,image/jpeg,image/png"
+                      >
+                    </input>
+                  </div>
+
+                  <div>
+                    <img ref={"background"} id={"user-background"} alt="user-background" src={backgroundImage} />
+                    <input
                       type="file"
-                      onChange={this.onAvatarChange}
+                      onChange={this.onBackgroundChange}
                       accept="image/x-png,image/gif,image/jpeg,image/png"
                     >
                     </input>
+                  </div>
+
                 </div>
                 {/*
                    <FormItem

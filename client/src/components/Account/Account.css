@@ -1,4 +1,18 @@
+.component-wrapper-account {
+	padding: 10px;
+}
+
 .accout-image {
 	max-width: 100px;
 	border-radius: 50%;
+}
+
+.accout-profile {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-size: contain;
+	width: 200px;
+	height: 200px;
+	border-radius: 10px;
 }

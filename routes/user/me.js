@@ -16,6 +16,7 @@ function me(req, res, next) {
                 console.error(err)
                 res.status(500)
             }
+            console.log('me:::', user)
             res.send(user)
         })
 }

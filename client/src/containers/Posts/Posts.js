@@ -7,6 +7,7 @@ import PostForm from 'components/PostForm/PostForm';
 import PostItem from 'components/PostItem/PostItem';
 import ExpandedPostItem from 'components/ExpandedPostItem/ExpandedPostItem';
 import Account from 'components/Account/Account';
+import Propositions from 'components/Propositions/Propositions';
 
 import './Posts.css';
 
@@ -98,7 +99,7 @@ class Posts extends Component {
             </Modal>
           </main>
           <aside>
-            aside
+            <Propositions />
           </aside>
         </div>
       </div>

@@ -40,7 +40,7 @@ class SignIn extends Component {
             .then(response => {
                 message.success(`How is going ${response.data.name}? 😉`)
                 this.props.loginSuccess(response.data)
-                this.props.history.push('/dashboard')
+                this.props.history.push('/posts')
             })
             .catch(err => {
                 message.error(err.response.data)

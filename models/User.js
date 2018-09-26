@@ -18,6 +18,10 @@ const userSchema = new Schema({
         data: Buffer,
         contentType: String
     },
+    background: {
+        data: Buffer,
+        contentType: String
+    },
     profile: {
         age: Number,
         about: String,

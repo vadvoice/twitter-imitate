@@ -12,7 +12,7 @@ function user(req, res, next) {
 
     UserModel.updateOne({_id: id}, {...req.body}, (err, updated) => {
         console.log('updated')
-        res.send('asdfsda')
+        res.send('updated')
     })
 
     function returnUpdated() {

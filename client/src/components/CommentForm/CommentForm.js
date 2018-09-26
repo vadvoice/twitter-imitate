@@ -23,7 +23,6 @@ class CommentForm extends Component {
             target: post._id
         })
             .then(res => {
-                console.log('leaved comment: ', res)
                 updatePosts()
             })
             .catch(err => console.error(err))

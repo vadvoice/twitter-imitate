@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from 'redux/store';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Router } from 'react-router-dom';
+import history from 'config/history';
 import registerServiceWorker from './registerServiceWorker';
 import axios from 'axios';
 
@@ -56,9 +57,9 @@ backgroundLogin();
 
 ReactDOM.render(
     <Provider store={ store }>
-        <BrowserRouter>
-            <Root />
-        </BrowserRouter>
+        <Router history={history}>
+            <Root/>
+        </Router>
     </Provider>
     , document.getElementById('root')
 );

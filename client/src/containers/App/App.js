@@ -14,14 +14,14 @@ class App extends Component {
     selected: []
   }
 
-  // getAllPosts = () => {
-  //   fetch('users')
-  //     .then(response => response.json())
-  //     .then(res => {
-  //       this.props.fetchUsers(res.users)
-  //     })
-  //     .catch(err => console.error(err))
-  // }
+  getAllPosts = () => {
+    fetch('users')
+      .then(response => response.json())
+      .then(res => {
+        this.props.fetchUsers(res.users)
+      })
+      .catch(err => console.error(err))
+  }
 
   getUsers = () => {
     axios.get('/user')
@@ -67,12 +67,10 @@ class App extends Component {
     return (
       <div className="App container">
         <header>
-          {/*
-            <Button
-              type="primary"
-              onClick={ this.getAllPosts }
-            >Fetch users</Button>
-          */}
+          <Button
+            type="primary"
+            onClick={ this.getAllPosts }
+          >Fetch users by store events</Button>
 
           <Button
               type="primary"

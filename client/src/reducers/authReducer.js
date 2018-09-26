@@ -35,9 +35,9 @@ export default function (state = initialState, action) {
       }
     case LOGOUT:
       window.localStorage.removeItem('user-info')
-      window.location.reload()
       return {
-        ...state
+        ...state,
+        authInfo: {}
       }
     default:
       return state;

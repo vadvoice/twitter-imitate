@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import history from 'config/history';
 import { LOGOUT } from 'actions/types';
 
 import Navigation from 'components/Navigation/Navigation'
 
 class Header extends Component {
+    logout = () => {
+        const {logoutAction} = this.props
+        history.push('/')
+        logoutAction()
+    }
+
     render() {
-        const {auth, logoutAction} = this.props
-        const isLogged = auth.authInfo.user
+        const {auth} = this.props
+        const isLogged = auth.authInfo._id
         return(
             <div className="componet-wrapper componet-wrapper-header">
-                <Navigation isLogged={isLogged} logoutAction={logoutAction} />
+                <Navigation history={history} isLogged={isLogged} logoutAction={this.logout} />
             </div>
         )
     }

@@ -1,0 +1,19 @@
+.posts-wrapper {
+	display: flex;
+}
+
+main {
+	flex: 3;
+}
+
+aside {
+	flex:1;
+}
+
+article {
+	flex: 1;
+}
+
+.post-form button {
+    margin-top: 20px;
+}

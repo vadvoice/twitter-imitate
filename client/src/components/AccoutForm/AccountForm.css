@@ -1,0 +1,11 @@
+.accout-form-avatar-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#user-avatar {
+    max-width: 10%;
+    min-width: 10%;
+    border-radius: 50%;
+}

@@ -14,6 +14,10 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Rilly... without email?']
     },
+    avatar: {
+        data: Buffer,
+        contentType: String
+    },
     profile: {
         age: Number,
         about: String,
@@ -24,8 +28,12 @@ const userSchema = new Schema({
         country: String
     },
     posts: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Post'
+    }],
+    following: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }],
     createdAt: Date,
     updatedAt: Date

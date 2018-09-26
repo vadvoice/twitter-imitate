@@ -21,17 +21,17 @@ const navigationLinks = {
         link: 'dashboard',
         title: 'dashboard'
     },
-    account: {
-        link: 'account',
-        title: 'account'
+    'account-settings': {
+        link: 'account-settings',
+        title: 'account-settings'
     },
-    news: {
-        link: 'news',
-        title: 'news list'
+    posts: {
+        link: 'posts',
+        title: 'posts list'
     }
 }
 
-const loggedInLinks = ['dashboard', 'account', 'app', 'news']
+const loggedInLinks = ['dashboard', 'account-settings', 'app', 'posts']
 const notLoggedInLinks = ['signin', 'signup', 'app']
 
 const Navigation = (props) => {
@@ -48,8 +48,10 @@ const Navigation = (props) => {
                         </div>
                     </div>
                     :
-                    <div className="navigation--links-wrap">
-                        {notLoggedInLinks.map((navigationKey, i) => <Link key={i} to={`/${navigationLinks[navigationKey].link}`}>{navigationLinks[navigationKey].title}</Link>)}
+                    <div className="navigation--content">
+                        <div className="navigation--links-wrap">
+                            {notLoggedInLinks.map((navigationKey, i) => <Link key={i} to={`/${navigationLinks[navigationKey].link}`}>{navigationLinks[navigationKey].title}</Link>)}
+                        </div>
                     </div>
             }
         </div>

@@ -1,43 +1,86 @@
 import React, { Component } from 'react';
-import {Form, Input, Select, Button} from 'antd';
+import {Form, Input, Button} from 'antd';
+
+import DefaultAvatar from 'assets/images/default-avatar.svg';
+import './AccountForm.css';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class AccoutForm extends Component {
 
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
+        downloadedAvatar: ''
     };
+
+    cleanObject(obj) {
+      Object.keys(obj).forEach(key => obj[key] === undefined && delete obj[key])
+    }
 
     handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values);
+          if(this.state.downloadedAvatar) {
+            values = {...values, avatar: this.state.downloadedAvatar}
+          }
+
+          this.cleanObject(values)
+          console.log('cleaned:::', values)
           this.props.submitAction(values)
         }
       });
     }
 
+    onAvatarChange = (evt) => {
+        var tgt = evt.target || window.event.srcElement,
+            files = tgt.files;
+
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = () => {
+                this.refs['avatar'].src = fr.result;
+                this.setState({
+                  downloadedAvatar: fr.result
+                })
+            }
+            fr.readAsDataURL(files[0]);
+        }
+        else {
+           console.error('not allowed format')
+        }
+    }
+
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { autoCompleteResult } = this.state;
+        const { downloadedAvatar } = this.state;
 
         return(
              <Form onSubmit={this.handleSubmit}  className="component-wrapper component-wrapper-account-form">
-                 <FormItem
-                      label="E-mail"
+                <div className="accout-form-avatar-block">
+                  <img ref={"avatar"} id={"user-avatar"} alt="user-avatar" src={downloadedAvatar ? downloadedAvatar : DefaultAvatar} />
+                  <input
+                      type="file"
+                      onChange={this.onAvatarChange}
+                      accept="image/x-png,image/gif,image/jpeg,image/png"
                     >
-                      {getFieldDecorator('email', {
-                        rules: [{
-                          type: 'email', message: 'The input is not valid E-mail!',
-                        }],
-                      })(
-                        <Input />
-                      )}
-                </FormItem>
+                    </input>
+                </div>
+                {/*
+                   <FormItem
+                        label="E-mail"
+                      >
+                        {getFieldDecorator('email', {
+                          rules: [{
+                            type: 'email', message: 'The input is not valid E-mail!',
+                          }],
+                        })(
+                          <Input />
+                        )}
+                  }
+                  </FormItem>
+                */}
 
                 <FormItem
                       label="Full name"

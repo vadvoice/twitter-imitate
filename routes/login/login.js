@@ -23,7 +23,7 @@ function login(req, res, next) {
                         access: 'auth',
                         exp: Math.floor(Date.now() / 1000) + (60 * 60 * 1)
                       }, config.secret)
-                    res.status(200).send({ token: token, user: findeduser})
+                    res.status(200).send({ token: token, ...findeduser._doc})
                 } else {
                     res.status(404).send('invalid email or password')
                 }

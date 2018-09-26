@@ -1,26 +1,44 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import AccoutForm from 'components/AccoutForm/AccoutForm'
 
-import './Account.css'
+import './Account.css';
 
 class Account extends Component {
 
-    state = {}
+    state = {
+        me: {}
+    }
 
-    submitData = (values) => {
-        const {auth} = this.props
-        axios.post(`user/update/${auth.authInfo.user._id}`, values)
-            .then(res => console.log('this is response: ', res))
-            .catch(err => console.error('this error: ', err))
+    componentWillMount() {
+        axios.get(`user/me/${this.props.auth.authInfo._id}`)
+            .then(res => {
+                this.setState({
+                    me: res.data
+                })
+            })
+            .catch(err => console.log(err))
     }
 
     render() {
+        const {me} = this.state
+
         return(
             <div className="component-wrapper component-wrapper-account">
                 <h1>Account</h1>
-                <AccoutForm submitAction={this.submitData}/>
+                <img className="accout-image" src={me.avatar} alt="avata-image" />
+                <p>
+                    {me.name}
+                </p>
+                <p>
+                    {me.email}
+                </p>
+                <p>
+                Posts: <span>{me.posts && me.posts.length}</span>
+                </p>
+                <p>
+                Following: <span>{me.following && me.following.length}</span>
+                </p>
             </div>
         )
     }

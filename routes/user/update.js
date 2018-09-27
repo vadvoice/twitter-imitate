@@ -1,10 +1,10 @@
 const fs = require('fs');
 const db = require('config/db');
 const UserModel = require('models/User');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const Grid = require('gridfs-stream');
-const GridFS = Grid(db, mongoose.mongo);
+// const Grid = require('gridfs-stream');
+// const GridFS = Grid(db, mongoose.mongo);
 
 function user(req, res, next) {
     const {id} = req.params;
@@ -15,8 +15,14 @@ function user(req, res, next) {
             '$push': {"following": following}
         }
         params = {...followUser}
-
-        fireUpdating(params)
+        UserModel.update({'_id': following}, {'$push': {'followers': id}}, {upsert: true}, (err, updated) => {
+            if(err) {
+                console.error('err: ', err)
+                res.status(500).end(err)
+            }
+            console.log('updated followers', updated)
+            fireUpdating(params)
+        })
      } else {
         fireUpdating(req.body)
      }

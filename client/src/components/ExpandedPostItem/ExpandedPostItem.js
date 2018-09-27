@@ -12,13 +12,14 @@ class ExpandedPostItem extends Component {
             <div
                 className="extended-post-item-wrap"
             >
-                <p>{post.content}</p>
+                <img className="post-item-avatar" src={auth.authInfo.avatar} alt="avatarImage"/>
+                <strong>{post.content}</strong>
                 <CommentForm
                     post={post}
                     auth={auth}
                     updatePosts={updatePosts}
                 />
-                <div>{post.comments.map((comment, index) => <p key={index}>{comment.content}</p>)}</div>
+                <ul className="extended-post-item-comments">{post.comments.map((comment, index) => <li key={index}>{comment.content}</li>)}</ul>
             </div>
 
         )

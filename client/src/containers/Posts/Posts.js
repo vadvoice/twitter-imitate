@@ -9,8 +9,6 @@ import ExpandedPostItem from 'components/ExpandedPostItem/ExpandedPostItem';
 import Account from 'components/Account/Account';
 import Propositions from 'components/Propositions/Propositions';
 
-import {Button} from 'antd';
-
 import './Posts.css';
 
 class Posts extends Component {

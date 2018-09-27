@@ -44,16 +44,15 @@ class CommentForm extends Component {
         const {commentContent} = this.state
 
         return(
-            <article>
+            <article className="comment-form">
                 <Form
                     id={"comment-form"}
-                    className={"post-form"}
+                    className={"comment-form"}
                     onSubmit={this.submitPost}
                 >
                     <TextArea
                         onChange={this.commentContentFilling}
                         onKeyUp={this.textAreaAdjust}
-                        form={"post-form"}
                         name={"commentContent"}
                         rows={2}
                         minLength={10}

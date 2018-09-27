@@ -14,7 +14,7 @@ const PostDetails = (props) => {
 	return(
 			<div>
 				<p>
-					<small><strong>{props.post.author.name}</strong> <i>{props.post.author.email}</i></small>
+					<small><strong>{props.post.author && props.post.author.name}</strong> <i>{props.post.author && props.post.author.email}</i></small>
 				</p>
 				{
 					props.postActions.map((action, index) => <span key={index}>

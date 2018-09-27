@@ -34,12 +34,16 @@ class Account extends Component {
                     </div>
                     <div className="accout-profile-stats">
                         <a>
-                            <span>Posts:</span>
+                            <span>Posts</span>
                             <strong className="accout-profile-stats-count">{me.posts && me.posts.length}</strong>
                         </a>
                         <a>
-                            <span>Following:</span>
+                            <span>Following</span>
                             <strong className="accout-profile-stats-count">{me.following && me.following.length}</strong>
+                        </a>
+                        <a>
+                            <span>Followers</span>
+                            <strong className="accout-profile-stats-count">{me.followers && me.followers.length}</strong>
                         </a>
                     </div>
                 </div>

@@ -38,7 +38,7 @@ class PostItem extends Component {
 		            <p
 		            	onClick={() => actionShow(post)}
 		            >{post.content}</p>
-		            <PostDetails postAction={this.postAction} postActions={actions} post={post} auth={auth}/>
+		            {auth.posts && <PostDetails postAction={this.postAction} postActions={actions} post={post} auth={auth}/>}
 	        	</div>
 	        </div>
 	    )

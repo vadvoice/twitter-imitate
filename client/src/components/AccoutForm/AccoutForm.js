@@ -23,12 +23,18 @@ class AccoutForm extends Component {
       e.preventDefault();
       this.props.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
+          const {city, country} = values
 
           if(this.state.downloadedAvatar) {
             values = {...values, avatar: this.state.downloadedAvatar}
           }
           if(this.state.backgroundImage) {
             values = {...values, background: this.state.backgroundImage}
+          }
+
+          values.address = {
+            city,
+            country
           }
 
           this.cleanObject(values)
@@ -78,6 +84,7 @@ class AccoutForm extends Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
+        const { auth } = this.props;
         const { downloadedAvatar, backgroundImage } = this.state;
 
         return(
@@ -94,7 +101,7 @@ class AccoutForm extends Component {
                   </div>
 
                   <div>
-                    <img ref={"background"} id={"user-background"} alt="user-background" src={backgroundImage} />
+                    <img ref={"background"} id={"user-background"} alt="user-background" src={auth.authInfo.background || backgroundImage} />
                     <input
                       type="file"
                       onChange={this.onBackgroundChange}

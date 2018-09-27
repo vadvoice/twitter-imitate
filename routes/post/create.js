@@ -11,7 +11,7 @@ function create(req, res, next) {
         	console.log('findedPost:::', findedPost)
         })
 
-        userModel.update({_id: req.body.author}, {'$push': {'posts': post._id}}, (err, saveStatus) => {
+        userModel.updateOne({_id: req.body.author}, {'$push': {'posts': post._id}}, (err, saveStatus) => {
 	        if(err) res.status(500).send(err)
 	        console.log('result of saving!!!', saveStatus)
         	res.send(post)

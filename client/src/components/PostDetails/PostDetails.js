@@ -26,12 +26,6 @@ const PostDetails = (props) => {
 						<small>{props.post.counters && props.post.counters[action]}</small>
 					</span>)
 				}
-			{/*
-				<Icon type="message" theme="outlined" />
-				<Icon type="retweet" theme="outlined" />
-				<Icon type="heart" theme="outlined" />
-				<Icon type="mail" theme="outlined" />
-			*/}
 
 			</div>
 		)
@@ -39,7 +33,7 @@ const PostDetails = (props) => {
 
 PostDetails.propTypes = {
 	post: PropTypes.object,
-	auth: PropTypes.object,
+	auth: PropTypes.object.isRequired,
 	postActions: PropTypes.arrayOf(PropTypes.string).isRequired,
 	postAction: PropTypes.func.isRequired
 }

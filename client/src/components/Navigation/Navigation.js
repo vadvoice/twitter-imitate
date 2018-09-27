@@ -27,7 +27,7 @@ const navigationLinks = {
     },
     posts: {
         link: 'posts',
-        title: 'posts list'
+        title: 'home'
     }
 }
 

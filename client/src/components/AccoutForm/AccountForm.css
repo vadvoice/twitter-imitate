@@ -7,7 +7,7 @@
 
 #user-avatar,
 #user-background {
-    max-width: 50%;
-    min-width: 50%;
+    max-width: 200px;
+    min-width: 200px;
     border-radius: 50%;
 }

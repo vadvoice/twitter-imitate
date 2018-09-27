@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from 'redux/store';
-import { BrowserRouter, Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import history from 'config/history';
 import registerServiceWorker from './registerServiceWorker';
 import axios from 'axios';
@@ -41,8 +41,11 @@ function backgroundLogin() {
     const localStorageUserInfo = window.localStorage.getItem('user-info');
     if (localStorageUserInfo) {
         const parsed = JSON.parse(localStorageUserInfo)
-        axios.defaults.headers['Authorization'] = `Bearer ${parsed.token}`;
-        axios.defaults.headers.common['Authorization'] = `Bearer ${parsed.token}`;
+        axios.defaults.headers['token'] = `${parsed.token}`;
+        axios.defaults.headers.common['token'] = `${parsed.token}`;
+
+        axios.defaults.headers['refreshToken'] = `${parsed.refreshToken}`;
+
         store.dispatch({
             type: LOGIN_SUCCESS,
             payload: parsed

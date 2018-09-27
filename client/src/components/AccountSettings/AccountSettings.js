@@ -17,10 +17,11 @@ class AccountSettings extends Component {
     }
 
     render() {
+        const {auth} = this.props
         return(
             <div className="component-wrapper component-wrapper-account">
                 <h1>Account Settings</h1>
-                <AccoutForm submitAction={this.submitData}/>
+                <AccoutForm auth={auth} submitAction={this.submitData}/>
             </div>
         )
     }

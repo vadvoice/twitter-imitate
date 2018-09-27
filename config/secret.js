@@ -1,3 +1,6 @@
 module.exports = {
-  'secret': 'supersecret'
+    "secret": "supersecret",
+    "refreshTockenSecret": "refreshSuperSecret",
+    "tokenLife": 86400,
+    "refreshTokenLife": 86400
 };

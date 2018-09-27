@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Button} from 'antd';
 
+import './Propositions.css'
+
 class Propositions extends Component {
 	state = {
 		users: []
@@ -23,16 +25,27 @@ class Propositions extends Component {
 	      })
 	}
 
+	followRequest = (user) => {
+		axios.post(`/user/update/${this.props.auth.authInfo._id}`, {
+			following: user._id
+		})
+			.then(res => console.log('response: ', res))
+			.catch(err => console.error('error: ', err))
+	}
+
 	render() {
 		const {users} = this.state
 		return(
-			<div className="container container-wrapper">
-				<h2>Freands you may know</h2>
+			<div className="container component-account-wrapper">
+				<h3>Freands you may know</h3>
 				<div className="users-wrapper">
-		          {users.map((user, i) => <div>
-		          	<p key={i}>{user.name}</p>
+		          {users.map((user, i) => <div key={i}>
+		          	<strong>{user.name}</strong>
+		          	<small>{user.email}</small>
 		          	<Button
+		          		size="small"
 						type="primary"
+						onClick={() => this.followRequest(user)}
 		          	>Follow</Button>
 		          </div>)}
 		        </div>

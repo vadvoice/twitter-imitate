@@ -5,6 +5,8 @@ import { LOGOUT } from 'actions/types';
 
 import Navigation from 'components/Navigation/Navigation'
 
+import './Header.css'
+
 class Header extends Component {
     logout = () => {
         const {logoutAction} = this.props

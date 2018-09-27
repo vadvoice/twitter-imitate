@@ -17,7 +17,7 @@ import {
 const Root = (props)  => {
     return (
         <div className="Root-component">
-            <Header />
+            <Header className="Root-header"/>
             <main>
                 <Switch>
                     <Route path="/app" component={ App } ></Route>

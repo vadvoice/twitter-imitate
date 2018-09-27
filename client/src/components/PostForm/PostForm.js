@@ -9,6 +9,10 @@ class PostForm extends Component {
         postContent: ''
     }
 
+    componentDidMount() {
+        this.refs['postFormContent'].focus()
+    }
+
     submitPost = (e) => {
         e.preventDefault()
         const {postContent} = this.state
@@ -42,6 +46,7 @@ class PostForm extends Component {
                 <Form
                     id={"post-form"}
                     className={"post-form"}
+                    ref={"postForm"}
                     onSubmit={this.submitPost}
                 >
                     <TextArea
@@ -49,14 +54,14 @@ class PostForm extends Component {
                         onKeyUp={this.textAreaAdjust}
                         form={"post-form"}
                         name={"postContent"}
+                        ref="postFormContent"
                         rows={2}
-                        minLength={10}
+                        minLength={5}
                         placeholder={"How is going?"}
                     ></TextArea>
                     <Button
                         type="primary"
                         htmlType="submit"
-                        className=""
                         disabled={!postContent.length}
                     >Post</Button>
                 </Form>

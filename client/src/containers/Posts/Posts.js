@@ -9,6 +9,8 @@ import ExpandedPostItem from 'components/ExpandedPostItem/ExpandedPostItem';
 import Account from 'components/Account/Account';
 import Propositions from 'components/Propositions/Propositions';
 
+import {Button} from 'antd';
+
 import './Posts.css';
 
 class Posts extends Component {
@@ -57,15 +59,19 @@ class Posts extends Component {
     })
   }
 
+  // check tocke verification request
+  checkAuth = () => {
+    axios.get('user/auth')
+      .then(res => console.log('response:', res))
+      .catch(err => console.error('error:', err))
+  }
+
   render() {
     const {posts, post, postVisible} = this.state
     const {auth} = this.props
 
     return (
       <div className="posts container">
-        <header>
-          <h1>posts</h1>
-        </header>
         <div className="posts-wrapper">
           <article>
             <Account />
@@ -99,7 +105,9 @@ class Posts extends Component {
             </Modal>
           </main>
           <aside>
-            <Propositions />
+            <Propositions
+              auth={auth}
+            />
           </aside>
         </div>
       </div>

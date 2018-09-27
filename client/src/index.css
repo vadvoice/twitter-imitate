@@ -26,3 +26,11 @@ body {
 h1 {
   color: inherit;
 }
+
+.Root-container {
+  position: relative;
+}
+
+.Root-component > main {
+  padding-top: 70px;
+}

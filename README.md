@@ -1,4 +1,4 @@
-# Twitter emitate
+# Twitter imitate
 
 Just simplest way to show how twitter works
 You can post tweets, retweets them, put the likes for the best or follow users that make tham

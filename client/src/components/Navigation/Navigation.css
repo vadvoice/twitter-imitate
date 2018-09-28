@@ -1,10 +1,11 @@
 .componet-wrapper-navigation a {
     display: inline-block;
     padding: 20px;
+    text-transform: capitalize;
 }
 
 .navigation--content {
     display: flex;
     justify-content: space-around;
     align-items: center;
-} 
+}

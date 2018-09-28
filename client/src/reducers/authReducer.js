@@ -2,8 +2,11 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  UPDATE_AUTH
 } from 'actions/types';
+import axios from 'axios';
+import { updateAuth } from 'actions/authActions'
 
 const initialState = {
   login: false,
@@ -11,6 +14,17 @@ const initialState = {
   credentials: {},
   authInfo: {}
 };
+
+function setHeaders(params) {
+    if (params) {
+        axios.defaults.headers['token'] = `${params.token}`;
+        axios.defaults.headers.common['token'] = `${params.token}`;
+
+        axios.defaults.headers['refreshToken'] = `${params.refreshToken}`;
+    } else {
+        console.error('UnAuthenticated')
+    }
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -28,6 +42,7 @@ export default function (state = initialState, action) {
       }
     case LOGIN_SUCCESS:
       window.localStorage.setItem('user-info', JSON.stringify(action.payload))
+      setHeaders(action.payload)
       return {
         ...state,
         loginWaiting: false,
@@ -39,6 +54,10 @@ export default function (state = initialState, action) {
         ...state,
         authInfo: {}
       }
+    case UPDATE_AUTH:
+      updateAuth(action.payload)
+      return state
+      break
     default:
       return state;
   }

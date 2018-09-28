@@ -1,0 +1,11 @@
+.component-wrapper-friand-account {
+	display: inline-flex;
+	flex-direction: column;
+	min-width: 30%;
+	margin: 10px 20px;
+	box-sizing: border-box;
+}
+
+.component-wrapper-friand-account button {
+	margin-top: 10px;
+}

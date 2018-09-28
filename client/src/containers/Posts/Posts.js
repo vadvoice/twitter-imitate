@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import moment from 'moment';
+import { UPDATE_AUTH } from 'actions/types';
 
 import {Modal} from 'antd';
 import PostForm from 'components/PostForm/PostForm';
@@ -31,6 +33,7 @@ class Posts extends Component {
     axios.get('post')
       .then(res => {
         this.setState({posts: res.data})
+        this.props.updateAuth(this.props.auth)
       })
       .catch(err => console.error('err: ', err))
   }
@@ -90,7 +93,7 @@ class Posts extends Component {
                 ></PostItem>)}
             </div>
             <Modal
-              title="Post"
+              title={moment(post.updatedAt).format('lll')}
               visible={postVisible}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
@@ -120,7 +123,12 @@ function putStateToProps(state) {
 }
 
 function putActionsToProps(dispatch) {
-  return {}
+  return {
+    updateAuth: (auth) => dispatch({
+      type: UPDATE_AUTH,
+      payload: auth
+    })
+  }
 }
 
 export default connect(putStateToProps, putActionsToProps)(Posts);

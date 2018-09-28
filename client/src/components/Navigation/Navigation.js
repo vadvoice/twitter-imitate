@@ -23,7 +23,7 @@ const navigationLinks = {
     },
     'account-settings': {
         link: 'account-settings',
-        title: 'account-settings'
+        title: 'account settings'
     },
     posts: {
         link: 'posts',
@@ -31,8 +31,8 @@ const navigationLinks = {
     }
 }
 
-const loggedInLinks = ['dashboard', 'account-settings', 'app', 'posts']
-const notLoggedInLinks = ['signin', 'signup', 'app']
+const loggedInLinks = ['dashboard', 'account-settings', 'posts']
+const notLoggedInLinks = ['signin', 'signup']
 
 const Navigation = (props) => {
     return(

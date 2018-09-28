@@ -6,7 +6,10 @@ import './Propositions.css'
 
 class Propositions extends Component {
 	state = {
-		users: []
+		users: {
+			potentialFriends: [],
+			friends: []
+		}
 	}
 
 	componentWillMount() {
@@ -14,10 +17,12 @@ class Propositions extends Component {
 	}
 
 	getUsers = () => {
-	    axios.get('/user')
+        const {auth} = this.props
+
+        axios.get(`user/friends/${auth.authInfo._id}`)
 	      .then(res => {
 	        this.setState({
-	          users: res.data.users
+	          users: res.data.friends
 	        })
 	      })
 	      .catch(err => {
@@ -39,14 +44,18 @@ class Propositions extends Component {
 			<div className="container component-account-wrapper">
 				<h3>Freands you may know</h3>
 				<div className="users-wrapper">
-		          {users.map((user, i) => <div key={i}>
-		          	<strong>{user.name}</strong>
-		          	<small>{user.email}</small>
+		          {users.potentialFriends.map((user, i) => <div key={i}>
+		          	<p>
+			          	<strong>{user.name}</strong>
+			          	<br />
+			          	<small>{user.email}</small>
+		          	</p>
 		          	<Button
 		          		size="small"
 						type="primary"
 						onClick={() => this.followRequest(user)}
 		          	>Follow</Button>
+		          	<hr/>
 		          </div>)}
 		        </div>
 			</div>

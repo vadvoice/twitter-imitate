@@ -43,6 +43,7 @@ app.use('/comment', commentRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+	console.log('req url: ', req.url)
   next(createError(404));
 });
 

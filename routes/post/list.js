@@ -4,7 +4,13 @@ function list(req, res, next) {
 	postModel.find()
 		.sort('-createdAt')
 		.populate({path: 'author', select: ['name', 'email', 'avatar']})
-		.populate('comments')
+		.populate({
+	        path: 'comments',
+	        populate: {
+	            path: 'user',
+	            model: 'User'
+	        }
+	    })
 		.exec(function (err, story) {
 			if (err) {
 				console.log('err: ', err)

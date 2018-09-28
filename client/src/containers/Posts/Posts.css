@@ -12,7 +12,8 @@ aside {
 }
 
 article {
-	flex: 1;
+	flex: 1.5;
+	margin-bottom: 15px;
 }
 
 .post-form button {

@@ -25,7 +25,7 @@ class Account extends Component {
 
         return(
             <div className="component-wrapper component-wrapper-account">
-                <div className="accout-profile" style={{background: `url(${me.background}) center no-repeat`}}></div>
+                <div className="accout-profile-background" style={{backgroundImage: `url(${me.background})`}}></div>
                 <div className="accout-content">
                     <img async className="accout-image" src={me.avatar} alt="avatarImage" />
                     <div className="accout-profile-card">
@@ -58,8 +58,10 @@ const putStateToProps = (state) => {
     })
 }
 
-const putActionsToProps = (dispatch) => {
-    return({})
+function putActionsToProps(dispatch) {
+  return {
+
+  }
 }
 
 export default connect(putStateToProps, putActionsToProps)(Account);

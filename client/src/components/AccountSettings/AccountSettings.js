@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import AccoutForm from 'components/AccoutForm/AccoutForm'
+import { UPDATE_AUTH } from 'actions/types';
 
 import './AccountSettings.css'
 
@@ -12,7 +13,9 @@ class AccountSettings extends Component {
     submitData = (values) => {
         const {auth} = this.props
         axios.post(`user/update/${auth.authInfo._id}`, values)
-            .then(res => console.log('this is response: ', res))
+            .then(res => {
+                this.props.updateAuth(auth)
+            })
             .catch(err => console.error('this error: ', err))
     }
 
@@ -33,8 +36,13 @@ const putStateToProps = (state) => {
     })
 }
 
-const putActionsToProps = (dispatch) => {
-    return({})
+function putActionsToProps(dispatch) {
+  return {
+    updateAuth: (auth) => dispatch({
+      type: UPDATE_AUTH,
+      payload: auth
+    })
+  }
 }
 
 export default connect(putStateToProps, putActionsToProps)(AccountSettings);

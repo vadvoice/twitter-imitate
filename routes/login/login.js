@@ -1,12 +1,18 @@
 var config = require('config/secret')
 var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose')
+const UserModel = require('models/User');
 var crypt = require('services/bcrypt')
 
 function login(req, res, next) {
     const { email, password } = req.body
     if(email && password) {
-        mongoose.model('User').findOne({ email: email }).exec((err, findeduser) => {
+        UserModel
+        .findOne({ email: email })
+        .populate('following')
+        .populate('followers')
+        .populate('posts')
+        .exec((err, findeduser) => {
             if (err) {
                 res.send(err)
             }
@@ -24,6 +30,7 @@ function login(req, res, next) {
                     }
                     const token = jwt.sign(user, config.secret, {expiresIn: config.tokenLife})
                     const refreshToken = jwt.sign(user, config.refreshTockenSecret, {expiresIn: config.refreshTokenLife})
+                    delete findeduser.password
 
                     res.status(200).send({token, refreshToken, ...findeduser._doc})
                 } else {

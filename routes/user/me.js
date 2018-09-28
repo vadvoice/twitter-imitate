@@ -1,16 +1,13 @@
-const userModel = require('models/User');
+const UserModel = require('models/User');
 
 function me(req, res, next) {
     const { id } = req.params
     if (!id) res.send(404).end()
 
-    userModel.findOne({ _id: id })
-        // .populate({
-        //     path: 'posts',
-        //     select: 'content',
-        //     options: { sort: { name: -1 } }
-        // })
-        // .populate('following')
+    UserModel.findOne({ _id: id })
+        .populate('following')
+        .populate('followers')
+        .populate('posts')
         .exec((err, user) => {
             if (err) {
                 console.error(err)

@@ -17,7 +17,6 @@ class PostItem extends Component {
 				user: auth.authInfo._id
 			})
 				.then(res => {
-					console.log('res::', res)
 					updatePosts()
 				})
 				.catch(err => console.error(err))

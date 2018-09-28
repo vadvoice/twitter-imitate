@@ -38,7 +38,6 @@ class AccoutForm extends Component {
           }
 
           this.cleanObject(values)
-          console.log('cleaned:::', values)
           this.props.submitAction(values)
         }
       });
@@ -85,13 +84,13 @@ class AccoutForm extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         const { auth } = this.props;
-        const { downloadedAvatar, backgroundImage } = this.state;
+        const { backgroundImage } = this.state;
 
         return(
              <Form onSubmit={this.handleSubmit}  className="component-wrapper component-wrapper-account-form">
                 <div className="accout-form-avatar-block">
                   <div>
-                    <img ref={"avatar"} id={"user-avatar"} alt="user-avatar" src={downloadedAvatar ? downloadedAvatar : DefaultAvatar} />
+                    <img ref={"avatar"} id={"user-avatar"} alt="user-avatar" src={auth.authInfo.avatar || DefaultAvatar} />
                     <input
                         type="file"
                         onChange={this.onAvatarChange}
@@ -137,10 +136,9 @@ class AccoutForm extends Component {
                         <Input />
                       )}
                 </FormItem>
-                
 
+                <h3>Address info</h3>
                 <div className="account-form-address-block">
-                  <p>Address info</p>
                   <FormItem
                         label="city"
                       >
@@ -158,6 +156,32 @@ class AccoutForm extends Component {
                         {getFieldDecorator('country', {
                           rules: [{
                             type: 'string', message: 'The input is not valid country!',
+                          }],
+                        })(
+                          <Input />
+                        )}
+                  </FormItem>
+                </div>
+
+                <h3>Profile info</h3>
+                <div className="account-form-profile-block">
+                  <FormItem
+                        label="age"
+                      >
+                        {getFieldDecorator('age', {
+                          rules: [{
+                            type: 'number', message: 'The input is not valid age!',
+                          }],
+                        })(
+                          <Input />
+                        )}
+                  </FormItem>
+                <FormItem
+                      label="Short charactiristic"
+                      >
+                        {getFieldDecorator('about', {
+                          rules: [{
+                            type: 'string', message: 'The input is not valid about!',
                           }],
                         })(
                           <Input />

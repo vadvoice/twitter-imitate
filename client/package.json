@@ -19,7 +19,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "node-sass": "^4.9.3",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.6.2",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0"
